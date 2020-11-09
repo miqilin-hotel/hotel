@@ -10,6 +10,7 @@ server:
     session:
       timeout: 86400
 
+
 spring:
   transaction:
     rollback-on-commit-failure: true

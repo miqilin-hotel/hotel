@@ -44,31 +44,12 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> findByCondition(@Param("user") User user, Page page);
 
     /**
-     * 获得今日新增数量
-     * @return
-     */
-    Integer getTodayCount();
-
-    /**
      * 获得用户客房数排名
      * @param limit 查询数量
      * @return
      */
     List<User> getUserPostRanking(Integer limit);
 
-    /**
-     * 获得最新注册用户
-     * @param limit
-     * @return
-     */
-    List<User> getLatestUser(Integer limit);
-
-    /**
-     * 获得热门用户
-     * @param limit 用户数量
-     * @return
-     */
-    List<User> getHotUsers(Integer limit);
 
 }
 

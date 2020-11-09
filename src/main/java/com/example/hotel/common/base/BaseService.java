@@ -11,10 +11,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import java.util.List;
 
-/**
- * @author 言曌
- * @date 2019-09-04 22:47
- */
 // JDK8函数式接口注解 仅能包含一个抽象方法
 public interface BaseService<E, ID extends Serializable> {
 
