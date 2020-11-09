@@ -11,9 +11,6 @@ import java.util.Map;
  * <p>
  * 员工表 Mapper 接口
  * </p>
- *
- * @author lu
- * @since 2019-12-29
  */
 @Repository
 public interface EmployeeMapper {

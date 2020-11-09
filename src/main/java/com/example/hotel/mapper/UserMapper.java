@@ -1,55 +1,46 @@
 package com.example.hotel.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.hotel.entity.User;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import com.example.hotel.entity.User;
 
 /**
- * @author example
+ * <p>
+ * 客户表 Mapper 接口
+ * </p>
  */
-@Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper {
 
     /**
-     * 根据角色Id获得用户
-     *
-     * @param roleId 角色Id
-     * @param page 分页信息
-     * @return 用户列表
-     */
-    List<User> findByRoleId(@Param("roleId") Long roleId, Page page);
-
-    /**
-     * 根据角色Id和条件获得用户
-     *
-     * @param roleId 角色Id
-     * @param user 条件
-     * @param page 分页信息
-     * @return 用户列表
-     */
-    List<User> findByRoleIdAndCondition(@Param("roleId") Long roleId,
-                                        @Param("user") User user, Page page);
-
-    /**
-     * 根据条件查询
-     *
-     * @param user 用户
-     * @param page 分页
-     * @return 用户列表
-     */
-    List<User> findByCondition(@Param("user") User user, Page page);
-
-    /**
-     * 获得用户客房数排名
-     * @param limit 查询数量
+     * 根据id查所有
+     * @param user
      * @return
      */
-    List<User> getUserPostRanking(Integer limit);
+    User selectAllUserById(User user);
 
+    /**
+     * 用户住宿的时候向user表中添加数据
+     * @param user
+     */
+    void insertUserZhuFang(User user);
+
+    /**
+     * 根据id删除，用在已退房上
+     * @param uid
+     */
+    void delAllUserById(int uid);
+
+    /**
+     * 根据姓名查住房人的信息
+     * @param user
+     * @return
+     */
+    User selectAllByUname(User user);
+
+    /**
+     * 根据身份证号查询所有
+     * @param user
+     * @return
+     */
+    User selectAllByIdCard(User user);
 
 }
-

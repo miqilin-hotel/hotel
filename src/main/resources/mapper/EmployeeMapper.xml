@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.mapper.EmployeeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.hotel.entity.Employee">
+        <id column="eid" property="eid" />
+        <result column="ename" property="ename" />
+        <result column="eage" property="eage" />
+        <result column="ephone" property="ephone" />
+        <result column="eidcard" property="eidcard" />
+        <result column="eposition" property="eposition" />
+        <result column="emoney" property="emoney" />
+        <result column="esex" property="esex"/>
+    </resultMap>
+<!--    有名字按名字查，没有差所有-->
+    <select id="selectAll" parameterType="map" resultType="com.example.hotel.entity.Employee">
+        select * from employee where ename like concat('%',#{ename},'%')
+        order by eid desc limit #{a},#{pageSize}
+    </select>
+
+<!--    有名字查名字总数，没有差所有-->
+    <select id="selectAllEmployeeByEnameCount" parameterType="map" resultType="int">
+        select count(*) from employee where ename like concat('%',#{ename},'%')
+        order by eid desc
+    </select>
+
+<!--    点击修改后进入修改页面出现的值-->
+    <select id="selectAllById" parameterType="int" resultMap="BaseResultMap">
+        select * from employee where eid=#{eid}
+    </select>
+
+<!--    修改员工信息-->
+    <update id="updateEmployeeById" parameterType="com.example.hotel.entity.Employee">
+        update employee set ename=#{ename},ephone=#{ephone},eposition=#{eposition},emoney=#{emoney},esex=#{esex} where eid=#{eid}
+    </update>
+
+<!--    根据ID删除-->
+    <delete id="delAllBId" parameterType="int">
+        delete from employee where eid=#{eid}
+    </delete>
+
+<!--    增加员工-->
+    <insert id="addEmployee" parameterType="com.example.hotel.entity.Employee">
+        insert into employee(ename,eage,esex,ephone,eidcard,eposition,emoney) values(#{ename},#{eage},#{esex},#{ephone},#{eidcard},#{eposition},#{emoney})
+    </insert>
+
+
+
+</mapper>

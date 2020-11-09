@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="baidu-site-verification" content="LRMJtX0GZl">
+    <meta name="Keywords"
+          content="国谊宾馆官方网站 - 酒店客房实时预订，北京国谊宾馆官方网站，国谊宾馆官方网站，北京国谊宾馆官方，北京国谊宾馆，北京国谊，国谊宾馆，国谊，北京酒店，国谊酒店，北京宾馆，北京国谊酒店，国宾楼，国宾">
+    <meta name="Description" content="北京国谊宾馆是一家涉外酒店，隶属于国务院机关事务管理局宾馆管理中心，是中央国家机关系统的特级宾馆。地址位于北京西二环与西三环之间，
+    宾馆开业时间1959年10月，新近装修时间2008年，两座楼高分别为8层和14层，客房总数413间（套）。 国谊宾馆总建筑面积5万平方米，拥有标准间、套间及豪华套间等房型。">
+    <title>国谊宾馆官方网站 - 酒店客房实时预订</title>
+    <link href="/static/css/style.css" rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}">
+    <!-- Booking start -->
+    <link rel="stylesheet" type="text/css" href="/static/css/one.style.css" th:href="@{/static/css/one.style.css}">
+    <!-- Booking end -->
+    <script src="/static/js/jquery.min.js" th:src="@{/static/js/jquery.min.js}" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="/static/js/jquery.KinSlideshow-1.1.js" th:src="@{/static/js/jquery.KinSlideshow-1.1.js}"
+            type="text/javascript"></script>
+    <script src="/static/js/jquery.kinMaxShow-1.1.min.js" th:src="@{/static/js/jquery.kinMaxShow-1.1.min.js}"
+            type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui/css/H-ui.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui.admin/css/H-ui.admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/Hui-iconfont/1.0.8/iconfont.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui.admin/skin/default/skin.css}" id="skin"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui.admin/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/laypage/1.2/skin/laypage.css}">
+    <script type="text/javascript" th:src="@{/static/lib/layer/2.4/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/My97DatePicker/4.8/WdatePicker.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/laypage/1.2/laypage.js}" src="/static/lib/laypage/1.2/laypage.js"></script>
+
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/js/laypage/skin/laypage.css}" href="/static/js/laypage/skin/laypage.css">
+    <link rel="stylesheet" th:href="@{/static/layui-v2.5.5/layui/css/modules/laydate/default/laydate.css}" href="/static/layui-v2.5.5/layui/css/modules/laydate/default/laydate.css">
+
+    <script th:src="@{/static/js/vue/vue.min.js}" src="/static/js/vue/vue.min.js"></script>
+    <script th:src="@{/static/js/jquery/jquery.min.js}" src="/static/js/jquery/jquery.min.js"></script>
+    <script th:src="@{/static/js/laypage/laypage.js}" src="/static/js/laypage/laypage.js" charset="utf-8"></script>
+    <script th:src="@{/static/js/layer/layer.js}" src="/static/js/layer/layer.js" charset="utf-8"> </script>
+    <!--    <script src="../layui/lay/modules/laydate.js"></script>-->
+    <script th:src="@{/static/layui-v2.5.5/layui/lay/modules/laydate.js}"src="/static/layui-v2.5.5/layui/lay/modules/laydate.js"></script>
+    <script th:src="@{/static/js/jquery-1.8.3.js}" src="/static/js/jquery-1.8.3.js"></script>
+    <script th:src="@{/static/js/laypage/laypage.js}" src="/static/js/laypage/laypage.js" charset="utf-8"></script>
+    <script th:src="@{/static/js/layer/layer.js}" src="/static/js/layer/layer.js" charset="utf-8"> </script>
+    <!--    <script src="../layui/lay/modules/laydate.js"></script>-->
+    <script th:src="@{/static/layui-v2.5.5/layui/lay/modules/laydate.js}"src="/static/layui-v2.5.5/layui/lay/modules/laydate.js"></script>
+
+    <script type="text/javascript">
+        var isMobile = navigator.appVersion.indexOf("Mobile");
+        if (isMobile > -1) {
+            window.location.href = "http://m.guoyihotel.com/mhbjguoyi/";
+        }
+    </script>
+</head>
+
+<style>
+    select{
+        color: #0C0C0C;
+    }
+
+    input{
+        color: #0C0C0C;
+    }
+</style>
+<body>
+
+<div id="main">
+    <!--头部内容开始-->
+    <div id="top">
+        <div id="top_c">
+            <div id="logo"><a href=""><img src="/static/image/picture/logo.png" width="153" height="173"></a></div>
+            <div id="top_left">
+                <img src="/static/image/picture/phone_ico.png" width="20" height="16">&nbsp;24小时服务热线&nbsp;010-68316611
+            </div>
+            <div id="top_right">
+                <div class="tq"></div>
+                <iframe src="javascript:;" frameborder="0" scrolling="no" width="270" height="27"
+                        allowtransparency="true"></iframe>
+            </div>
+            <!-- login -->
+            <ul class="nav navbar-nav">
+                <li id="myOrder" class="page-scroll hidden-xs hidden-sm"><a href="javascript:searchOrder()"
+                                                                            class="vip-btn vip-li-a">我的预订</a></li>
+            </ul>
+            <!-- End login -->
+        </div>
+
+    </div>
+    <!--头部内容结束-->
+    <!--导航内容开始-->
+
+
+    <div id="nav">
+        <div id="nav_c">
+            <ul id="menu">
+            </ul>
+            <div class="langage"><span><a href="">中文</a></span>|<span><a href="/user/toQianTaiIndex">English</a></span>
+            </div>
+        </div>
+
+    </div>
+    <!--导航内容结束-->
+    <!--BANNER内容开始-->
+    <div id="banner">
+        <div id="kinMaxShow"></div>
+        <div id="banner_c">
+
+            <!--yd start-->
+            <div id="yd">
+                <form name="queryPriceForm" method="post">
+                    <div class="yd_tit"><img src="/static/image/picture/tit_img.png" width="28" height="24">&nbsp;&nbsp;客房与房价
+                    </div>
+                    <div class="yd_ip">
+                        <div class="yd_ip_l">
+                            开始时间：<input type="text"  id="reserveBeginTime">
+                        </div>
+                        <div class="yd_ip_r">
+                            结束时间：<br/><input type="text"  id="reserveEndTime">
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="yd_bu">
+                        <div class="yd_bu_l">
+                            <div class="tx">房间类型</div>
+                            <div>
+                                <select name="roomNum" id="roomnum" onchange="queryByState1(this.options[this.options.selectedIndex].value)">
+                                    <option value="">请选择</option>
+                                    <option value="" selected="selected">全部</option>
+                                    <option value="标间">标间</option>
+                                    <option value="大床间">大床间</option>
+                                    <option value="双人间">双人间</option>
+                                    <option value="三人间">三人间</option>
+                                    <option value="豪华套间">豪华套间</option>
+                                    <option value="总统套间">总统套间</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="yd_bu_r">
+                            <div class="tx">可入住房间号</div>
+                            <div>
+                                <select id="college" onchange="queryByRserial(this.options[this.options.selectedIndex].value)">
+                                    <option value="0" disabled="disabled" selected="selected" id="rserial">--请选择房间--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <div class="yd_bu">
+                        请输入身份账号：<input type="text" id="uidcard" style="color: #0C0C0C">
+                    </div>
+                    <div class="yd_bu">
+                        请输入真实看姓名       ：<input type="text" id="uname" style="color: #0C0C0C">
+                    </div>
+                    <div class="yd_bu">
+                        请输入联系方式：<input type="text" id="uphone" style="color: #0C0C0C">
+                    </div>
+                    <div class="yd_bu">
+                        请输入身份证上的家庭住址(备案需用)：<input type="text" id="uaddress" style="color: #0C0C0C">
+                    </div>
+                    <div class="yd_an">
+                        <div class="yd_an_r">
+<!--                            <a href="javascript:void(0)">-->
+                                <button type="button" class="btn btn-success radius" id="searchRserial" onclick="yuding()">
+                                    <i class="Hui-iconfont"></i> 预定</button>
+<!--                            </a>-->
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <!--yd end-->
+        </div>
+
+    </div>
+    <!--BANNER内空结束-->
+    <!--主体内容开始-->
+    <!--主体内容结束-->
+    <!--底部内空开始-->
+    <div id="footer">
+        <div id="footer_c">
+            <div id="footer_left">
+                <div class="footer_left1">
+                    <ul>
+                        <li><a href="#">关于我们</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">酒店优惠</a></li>
+                        <li><a href="#">酒店新闻</a></li>
+                        <li><a href="javascript:;" class="end">酒店微博</a></li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+                <div class="footer_left2">
+                    地址：北京市西城区文兴东街1号&nbsp;&nbsp;&nbsp;&nbsp;电话：010-68316611&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;邮编：
+                    100044
+
+                </div>
+                <div class="footer_left3">
+                    XXXXXXXXXXXXXXXX
+                </div>
+
+            </div>
+            <div id="footer_right">
+                <!--百度分享start-->
+                <div class="bdsharebuttonbox">
+                    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+                    <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+                    <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+                    <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+                    <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
+                    <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+                </div>
+
+                <!--百度分享end-->
+            </div>
+        </div>
+    </div>
+    <!--底部内空结束-->
+
+</div>
+
+</body>
+</html>
+
+
+<script src="/static/js/login.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/xdate.js" charset="utf-8"></script>
+<script src="/static/js/laydate.js" charset="utf-8"></script>
+<script src="/static/js/booking.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery.md5.js" type="text/javascript" charset="utf-8"></script>
+
+<script language="JavaScript" src="/static/js/menu.js" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="/static/js/config.js" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="/static/js/news_api.js" type="text/javascript" charset="utf-8"></script>
+<script language="JavaScript" src="/static/js/news_cms.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var nodeId = "";
+    menuAction(CN, renderIndexMenu);
+    picturesAction("3303");
+
+    function show_login() {
+        $("#content2_3").show()
+    }
+
+    function hide_login() {
+        $("#content2_3").hide()
+    }
+</script>
+
+<script>
+
+    //时间选择器
+    laydate.render({
+        elem: '#reserveBeginTime'
+        ,type: 'datetime'
+    });
+    //时间选择器
+    laydate.render({
+        elem: '#reserveEndTime'
+        ,type: 'datetime'
+    });
+
+    var fangjianhao='';
+    function queryByRserial(obj) {
+        fangjianhao=obj;
+        console.log(fangjianhao);
+    }
+
+    function yuding() {
+
+
+        $.ajax({
+            url:'/room/toYuDingChaShuJu',
+            dataType:'json',
+            type:"post",
+            data:{
+                rserial:fangjianhao,
+                reserveBeginTime:$("#reserveBeginTime").val(),
+                reserveEndTime:$("#reserveEndTime").val(),
+                uidcard:$("#uidcard").val(),
+                uaddress:$("#uaddress").val(),
+                uname:$("#uname").val(),
+                uphone:$("#uphone").val()
+            },success:function (data) {
+                if (data.msg=="1"){
+                    alert("预定成功,请当天十二点前去办理入住！");
+                }else {
+                    alert("预定失败,请联系工作人员！");
+                }
+            }
+        })
+    }
+    
+    function queryByState1() {
+        getRoomAllClientCheckInPageList1();
+    }
+    /**
+     * 2019-12-15 12:01
+     * 遍历出房间
+     */
+    var getRoomAllClientCheckInPageList1 = function (curr) {
+        $.ajax({
+            type:'POST',
+            dataType:'JSON',
+            url:'/room/getAllByTypeYuDing',
+            data:{
+                rtype:$("#roomnum option:checked").val()
+            },
+            success:function (data) {
+                /**
+                 * 下拉框二级联动
+                 */
+                optionJson = data.room;
+                var a=data.room.length;
+                var selectObj=document.getElementById("college");
+                selectObj.options.length=0;
+                selectObj.options.add(new Option("请选择房间",0));
+                for(var i=0;i<data.room.length;i++){
+                    selectObj.add(new Option(optionJson[i].rserial,optionJson[i].rserial));
+                }
+            }
+        });
+    }
+    getRoomAllClientCheckInPageList1();
+</script>
+<script type="text/javascript" src="/static/js/jia.js" charset="utf-8"></script>
+
+
+

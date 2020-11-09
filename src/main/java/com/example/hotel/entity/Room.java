@@ -6,9 +6,6 @@ import java.io.Serializable;
  * <p>
  * 房间
  * </p>
- *
- * @author lu
- * @since 2019-12-29
  */
 
 public class Room implements Serializable {

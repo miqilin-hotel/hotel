@@ -1,0 +1,72 @@
+<!--顾客入住-->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/h-ui.admin/css/bootstrap.min.css">
+
+    <script src="/static/js/jquery-1.8.3.js" th:src="@{/static/js/jquery-1.8.3.js}"></script>
+</head>
+<body>
+<div class="container" id="app">
+
+    <form id="addUserForm">
+        <br/>
+        <div class="form-group">
+            <label for="uname">姓名：</label>
+            <input type="text" class="form-control" id="uname" name="uname">
+        </div>
+        <div class="form-group">
+            <label for="uphone">联系方式：</label>
+            <input type="text" class="form-control" id="uphone" name="uphone">
+        </div>
+        <div class="form-group">
+            <label for="uidcard">身份证号：</label>
+            <input type="text" class="form-control" id="uidcard" name="uidcard">
+        </div>
+        <div class="form-group">
+            <label for="uaddress">家庭住址：</label>
+            <input type="text" class="form-control" id="uaddress" name="uaddress">
+        </div>
+        <div>
+            <button type="button" id="saveBtn" class="btn btn-success">提交</button>
+            <button type="button" id="cancelBtn" class="btn btn-default">取消</button>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    $("#saveBtn").click(function () {
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/user/clientRuZhu',
+            data: {
+                uname:$("#uname").val(),
+                uphone:$("#uphone").val(),
+                uidcard:$("#uidcard").val(),
+                uaddress:$("#uaddress").val()
+            },
+            success:function (msg) {
+                $("#cancelBtn").click();
+            }
+        }) ;
+    });
+
+    var quxiao=function(){
+        var index=parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+
+    $("#cancelBtn").click(function () {
+        quxiao();
+    })
+
+
+
+</script>
+</body>
+</html>

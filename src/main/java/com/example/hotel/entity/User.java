@@ -1,72 +1,83 @@
 package com.example.hotel.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.example.hotel.common.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * 用户信息
+ * <p>
+ * 客户表
+ * </p>
  */
-@Data
-@TableName("user")
-public class User extends BaseEntity {
 
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private int uid;
     /**
-     * 手机号
+     * 用户姓名
      */
-    private String userName;
-
+    private String uname;
     /**
-     * 显示名称
+     * 客户联系方式
      */
-    private String userDisplayName;
-
+    private String uphone;
     /**
-     * 密码
+     * 客户的身份证号
      */
-    @JsonIgnore
-    private String userPass;
-
+    private String uidcard;
     /**
-     * 身份证号码
+     * 客户的家庭住址
      */
-    private String idCard;
+    private String uaddress;
 
-    /**
-     * 头像
-     */
-    private String userAvatar;
+    public int getUid() {
+        return uid;
+    }
 
-    /**
-     * 说明
-     */
-    private String userDesc;
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
 
-    /**
-     * 最后一次登录时间
-     */
-    private Date loginLast;
+    public String getUname() {
+        return uname;
+    }
 
-    /**
-     * 0 正常
-     * 1 禁用
-     * 2 已删除
-     */
-    private Integer status = 0;
+    public void setUname(String uname) {
+        this.uname = uname;
+    }
 
-    /**
-     * 创建时间
-     */
-    private Date createTime;
+    public String getUphone() {
+        return uphone;
+    }
 
-    /**
-     * 角色名称
-     */
-    @TableField(exist = false)
-    private String role;
+    public void setUphone(String uphone) {
+        this.uphone = uphone;
+    }
 
+    public String getUidcard() {
+        return uidcard;
+    }
+
+    public void setUidcard(String uidcard) {
+        this.uidcard = uidcard;
+    }
+
+    public String getUaddress() {
+        return uaddress;
+    }
+
+    public void setUaddress(String uaddress) {
+        this.uaddress = uaddress;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+        "uid=" + uid +
+        ", uname=" + uname +
+        ", uphone=" + uphone +
+        ", uidcard=" + uidcard +
+        ", uaddress=" + uaddress +
+        "}";
+    }
 }

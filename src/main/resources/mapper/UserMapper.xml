@@ -2,163 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hotel.mapper.UserMapper">
 
-    <sql id="normal">0</sql>
-    <sql id="ban">1</sql>
-    <sql id="deleted">2</sql>
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.hotel.entity.User">
+        <id column="uid" property="uid" />
+        <result column="uname" property="uname" />
+        <result column="uphone" property="uphone" />
+        <result column="uidcard" property="uidcard" />
+        <result column="uaddress" property="uaddress" />
+    </resultMap>
 
-    <select id="findByRoleId" resultType="com.example.hotel.entity.User">
-      SELECT
-          t.id,
-          t.user_name,
-          t.user_display_name,
-          t.user_pass,
-          t.id_card,
-          t.user_avatar,
-          t.user_desc,
-          t.login_last,
-          t.status,
-          t.create_time
-      FROM
-          user_role_ref r,
-          user t
-      WHERE
-          r.role_id = #{roleId} AND
-          r.user_id = t.id
-          AND t.del_flag = 0
-          AND r.del_flag = 0
-      ORDER BY
-          t.id DESC
-  </select>
+    <!--    根据id查所有-->
+    <select id="selectAllUserById" parameterType="user" resultMap="BaseResultMap">
+        select * from user where uid=#{uid}
+    </select>
 
-    <select id="findByRoleIdAndCondition" resultType="com.example.hotel.entity.User">
-        SELECT
-        t.id,
-        t.user_name,
-        t.user_display_name,
-        t.user_pass,
-        t.id_card,
-        t.user_avatar,
-        t.user_desc,
-        t.login_last,
-        t.status,
-        t.create_time
-        FROM
-        user_role_ref r,
-        user t
-        WHERE
-        t.del_flag = 0 AND
-        r.del_flag = 0 AND
-        r.role_id = #{roleId} AND
-        r.user_id = t.id
-        <if test="user.status != null and user.status != ''">
-            AND t.status = #{user.status}
-        </if>
-        <if test="user.userName != null and user.userName != ''">
-            AND t.user_name LIKE CONCAT('%', #{user.userName}, '%')
-        </if>
-        <if test="user.userDisplayName != null and user.userDisplayName != ''">
-            AND t.user_display_name LIKE CONCAT('%', #{user.userDisplayName}, '%')
-        </if>
-        <if test="user.idCard != null and user.idCard != ''">
-            AND t.id_card LIKE CONCAT('%', #{user.idCard}, '%')
-        </if>
-        ORDER BY
-        t.id DESC
+    <!--    用户住宿的时候向user表中添加数据-->
+    <insert id="insertUserZhuFang" parameterType="user">
+        insert into user(uname,uphone,uidcard,uaddress) values (#{uname},#{uphone},#{uidcard},#{uaddress})
+    </insert>
+
+    <!--    根据id删除 用在删除已退房上-->
+    <delete id="delAllUserById" parameterType="int">
+        delete from user where uid=#{uid}
+    </delete>
+
+    <!--    根据姓名查住房人的信息-->
+    <select id="selectAllByUname" parameterType="user" resultMap="BaseResultMap">
+        select * from user where uname=#{uname}
     </select>
 
 
-    <select id="findByCondition" resultType="com.example.hotel.entity.User">
-        SELECT
-        t.id,
-        t.user_name,
-        t.user_display_name,
-        t.user_pass,
-        t.id_card,
-        t.user_avatar,
-        t.user_desc,
-        t.login_last,
-        t.status,
-        t.create_time
-        FROM
-        user t
-        WHERE
-        t.del_flag = 0
-        <if test="user.status != null and user.status != ''">
-            AND t.status = #{user.status}
-        </if>
-        <if test="user.userName != null and user.userName != ''">
-            AND t.user_name LIKE CONCAT('%', #{user.userName}, '%')
-        </if>
-        <if test="user.userDisplayName != null and user.userDisplayName != ''">
-            AND t.user_display_name LIKE CONCAT('%', #{user.userDisplayName}, '%')
-        </if>
-        <if test="user.idCard != null and user.idCard != ''">
-            AND t.id_card LIKE CONCAT('%', #{user.idCard}, '%')
-        </if>
-        ORDER BY
-        t.id DESC
+    <!--    根据身份证号查所有-->
+    <select id="selectAllByIdCard" parameterType="room" resultMap="BaseResultMap">
+        select * from user where uidcard=#{uidcard};
     </select>
 
-
-    <select id="getTodayCount" resultType="java.lang.Integer">
-        SELECT
-            count( * )
-        FROM
-            post
-        WHERE
-            to_days( create_time ) = to_days( now( ) )
-            AND del_flag = 0
-    </select>
-
-    <select id="getUserPostRanking" resultType="com.example.hotel.entity.User">
-        SELECT
-            count( * ) postCount,
-            u.id,
-            u.user_name,
-            u.user_avatar,
-            u.user_display_name,
-            u.login_last,
-            u.create_time
-        FROM
-            post p,
-            user u
-        WHERE
-            p.user_id = u.id
-            AND p.del_flag = 0
-            AND u.del_flag = 0
-        GROUP BY
-            p.user_id
-        ORDER BY
-            postCount DESC
-            LIMIT #{value}
-    </select>
-
-    <select id="getLatestUser" resultType="com.example.hotel.entity.User">
-        SELECT
-            id,
-            user_name,
-            user_avatar,
-            user_display_name,
-            create_time
-        FROM
-            user
-        WHERE
-            del_flag = 0
-        ORDER BY
-            create_time DESC
-            LIMIT #{value}
-    </select>
-
-    <select id="getHotUsers" resultType="com.example.hotel.entity.User">
-        SELECT
-            u.id,
-            u.user_name,
-            u.user_avatar,
-            u.user_display_name,
-            ( SELECT count( * ) FROM post p WHERE p.user_id = u.id ) postCount
-        FROM
-            USER u
-        ORDER BY
-            postCount DESC
-    </select>
 </mapper>

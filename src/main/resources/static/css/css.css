@@ -1,0 +1,152 @@
+@charset "utf-8";
+* {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	font-family: Arial, "宋体";
+	font-size: 12px;
+	line-height: 1.5em;
+	text-decoration: none;
+}
+li{
+	list-style-type: none;
+	padding:0px;
+	margin:0px;
+	}
+a{
+	color:#026783;
+	text-decoration:none;
+	}
+.active{
+	color:#002e3b;
+}
+img {border:0;vertical-align:middle;}
+.right{
+	float:right;
+	margin-right:60px;
+	margin-top:10px;
+	}
+.clear{
+	clear:both;
+	
+	}
+.center{
+	width:1003px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	}
+.top{
+	text-align:center;
+	margin-bottom:-30px;
+	}
+.nav{
+	border-top:#026783 solid 1px;
+	border-bottom:#026783 solid 1px;
+	padding:10px 0px 10px 0px;
+	height:20px;
+	margin-top:20px;
+	}
+.nav ul{
+	margin-left:15px;
+	}
+.nav ul li{
+	float:left;
+	list-style-type:none;
+	padding-left:35px;
+	padding-right:35px;
+	border-left:#026783 solid 1px;
+	}
+.nav ul li a{
+	display:block;
+	padding-left:20px;
+	padding-right:20px;
+	font-size:14px;
+	}
+.nav ul li a:hover{
+	background:#b5c7d3;
+	}
+.nav ul .ahor a{
+	background:#b5c7d3;
+	}	
+.con{
+	margin-top:15px;
+	height:275px;
+	}
+.con1{
+	height:80px;
+	background-color:#006986;
+	}	
+.cel{
+	margin-top:10px;
+	height:30px;
+	border-top:#b4d7e0 solid 1px;
+	border-bottom:#b4d7e0 solid 1px;
+	}
+.cel ul li{
+	line-height:30px;
+	color:#026783;
+	font-size:14px;
+	float:left;
+	padding:0px 130px 0px 130px;
+	border-left:#b4d7e0 solid 1px;
+	border-right:#b4d7e0 solid 1px;
+	}
+.cel ul .lic{
+	margin:0px 24px 0px 25px;
+	}
+.celc{
+	margin-top:15px;
+	}
+.celc .clelc_l{
+	float:left;
+	width:316px;
+	border:#d0e3e8 solid 1px;
+	}
+.celc .clelc_c{
+	float:left;
+	width:316px;
+	margin:0px 24px 0px 25px;
+	}
+.celc .clelc_r{
+	float:left;
+	width:316px;
+	}
+.bottom_b{
+	margin-top:20px;
+	padding-top:5px;
+	padding-bottom:5px;
+	background-color:#c7c7c7;
+	}
+
+.bottom_b ul li{
+	float:left;
+	margin-left:40px;
+	}
+.left1{
+	float:left;
+	}
+.right1{
+	float:right;
+	}
+.bottom_t{
+	text-align:center;
+	margin-top:15px;
+	
+	}
+.center_main{
+	margin-top:5px;
+	background:#e9e7d8;
+	
+    padding:20px 20px 20px 20px;
+	color:#234d4c;
+	}
+.center_main h2{
+	color:#006986;
+	font-size:14px;
+	}
+.cen_left{
+	float:left;
+	width:300px;
+	
+	}
