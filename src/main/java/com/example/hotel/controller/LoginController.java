@@ -12,5 +12,11 @@ public class LoginController {
         modelAndView.setViewName("/qiantai/index");
         return modelAndView;
     }
+    @RequestMapping("/H-ui.admin/index")
+    public ModelAndView welcome(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/H-ui.admin/index");
+        return modelAndView;
+    }
 
 }

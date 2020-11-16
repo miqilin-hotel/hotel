@@ -1,0 +1,277 @@
+<!--高顺-->
+<!DOCTYPE html>
+<!-- suppress ThymeleafVariablesResolveInspection -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A admin dashboard application demo built upon Ant Design and Dva.js">
+    <title>南瓜课堂登录</title>
+    <script th:src="@{/static/js/login.js}"></script>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}">
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}">
+</head>
+<style>
+    .layui-form-item {
+        margin-left: -20px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .layui-form-item {
+        margin: auto;
+        width: 315px !important;
+        height: 49px;
+        border: none;
+        padding: 2px 0;
+        position: relative;
+        border-radius: 3px;
+        margin: 10px auto;
+        line-height: 49px;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .layui-input-block {
+        margin-left: 20px;
+        line-height: 43px;
+    }
+
+    .layui-form-radio {
+        margin: 6px -3px 0 0;
+    }
+</style>
+<body>
+<div class="root" id="code">
+
+    <div class="loginPop___1CsFh" version="3.3.4">
+        <div class="loginBox___2Xt6j">
+            <div class="logintitle___1W8YV">
+                <div>欢迎来到南瓜课堂</div>
+                <div class="registerpondx___e-_hU" th:onclick="window.parent.yincang()">
+                    <img src="https://www-cdn-res.shiguangkey.com/res/images/x-black.png"
+                         alt="">
+                </div>
+            </div>
+            <div class="swith___1FNx-">
+                <div class="loginNav___2o18r">
+                </div>
+                <div class="account___2IrJR">
+                    <div class="acc-input mtop25 layui-form">
+                        <div class="acountBox___1YcKn acctype">
+                            <input type="text" class="atin___1pcep" id="userPhone" name="userPhone"
+                                   placeholder="请输入账号">
+                        </div>
+                        <div class="acctype">
+                            <input type="password" class="atin___1pcep" id="userPwd" name="userPwd"
+                                   placeholder="请输入密码">
+                        </div>
+                        <div class="layui-form-item">
+                            <a class="fl item-pss" style="cursor: pointer;text-decoration: none">选择身份</a>
+                            <div class="layui-input-block">
+                                <input type="radio" id="ck_user" name="c1" value="用户登录" title="用户" checked/>
+                                <input type="radio" d="ck_teacher" name="c1" value="讲师登录" title="讲师"/>
+                                <input type="radio" d="ck_admin" name="c1" value="管理员登录" title="管理员"/>
+                            </div>
+                        </div>
+                        <div class="item-member">
+                            <a class="fl item-pss" style="cursor: pointer;">免费注册</a>
+                            <a class="fr item-pss" href="" target="_black" style="cursor: pointer;">忘记密码?</a>
+                        </div>
+                        <button class="loginButton___1GO7F layui-btn layui-btn-radius" type="button" id="but">立即登录
+                        </button>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="gantitle___1Bo_m"><span class="gttxt___1vaWe">快速登录</span></div>
+                    <div class="ganerBut___fOt-k"><span id="weixinLogin" class="undefined undefined"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAA1CAMAAADWOFNCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo4ZTMxNTgzZS1hZGU3LThkNDEtYmExOC05YTgzMzc3NGFlZmIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjZCNzg3REJDMDY0MTFFN0I2MDg4NTk4ODg4MzczQjYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjZCNzg3REFDMDY0MTFFN0I2MDg4NTk4ODg4MzczQjYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6YjhlOWY0YjUtZWNiZS0xMTQxLTk1ZmQtNTg0YWQyYzY5MDI2IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NzczNjY2YjMtMDU2ZC0xMWU3LWI1MzEtZWU3ZDQxMDVlMzRhIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+t8noIwAAAg1QTFRF/v/++P347fnu+/77as123/Th8PrxddGAdtGBbs96i9iUf9SJ8frycM97wOrF7fnvpeGsh9eQnN6k9fz2wuvIoeCpvenD0e/V8vvzn9+n7Pntm92jiNeRbc55eNKDf9SK3fTgbM54etOFhtaQnd6luOe+rOOz5vfo4PXj0/DWc9B+w+vImNyg9vz3/f796vjs2fLccc982PLc+f36dNGA9Pv16PfqjtqXfNOG5Pbn+/78j9mYoN+ouui/kNqaideSb8971vHZmt2i1PHYgNWLedKDyO3NqeKw5vbobs55v+rEruS0t+e8zu7SbM53ldud2PLbvenC6/jtw+vHxevJqeKv7/rw/P78xuzLseW34PTi4/Xmu+jB5/fpyOzMitiTcdB90fDVctB9fdOHs+a5kNqZgdWLa813+P355PbmltyexezKt+e9g9WNk9uc1/LaetOEzO3P7vnv2fPcedKEyu3Oh9eRq+OypOCrx+zMktqazO7Q4fXjgtWMldyent6lquOxl9yfkdqZ3PPelNuc6ffrnt+mmd2htOa6jtmX3PTfouCpruS1k9uby+7Q4/bl5fbozu/Sp+KujdmXe9OG4/XlhdaP+v36ftSI0O/Uj9qYze7RhNaN4vXketKEkdqaoN+nnd6km96j3PPfqOKv4PTjfdSIuei/mNyhsuW4r+S2lNud////ac11////pqDYQAAAAK90Uk5T////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////AH+0A4EAAALDSURBVHjalJZnXyIxEIdDFUTpIAgqeoiA2Huvp2dvp17vvffee++997rZz3hZ94TJkmXX/4vszjAP2eSXzAzi04XOeT3ZH7oxrrHcv7RKy4pI84TsWZjSj9/rFajKgR2Yoe3Vmag+C5bR7TI5qiGA5TX+Z55JfS3BGbXRxqCOj2MFZUXTqGGsrNyDEmolViOzgaJielUUzqoClDaOVWqZLkmhbKxag0nKqh7C+uh/yrdlCRQOIpEakfhNb07ZPV1mOezxAuXKpZxd5TmcoKrSZzIbskCVQlexm0tpio1VC1QRcDTnc1C13SzqE6F2Azvu42hpTQyqRof4dcA2kMDn7xzCwuaazr8njzzWZJOIn0hZB4S/92B8mDzKMZ4VzCCD2oZ4kCU2C2G2CwkNeWjaz8yTL2yMMKi/yAUsI72o0Oy+Uq814lwupUqQAVitFBTu97rEN7eE06MYsHIgFNyTeq+8TGPoATBqARTopCambwXaAIymVJQhTAbX6B0yHh0lu4P6KeottM4mqW954u4jjsNYOGU9FNVHTb24i62/rpNx2n+ajHvbj5DRSFEPKcrSIFIrwpKjxe2CRxxp6N0pEI9vo1NKwTgL4umMW0Dm+U4WE3gkofJBUC/inRQ1hvwY15+4Ur9WQnWAoA7Ez0Bo5+fFq3GXhowwYUYRr5VJD7cgNHcI/FKIyF2WS4ZPUtAa6nKeFDKAbIovctctMHWSu1kmULpC+SLSab/n35pr5V4A54SYD6cUM+c1BzBCIqVrXkruTSzm+dgSILMtWYkuqqeGU/VLU6QWuglrZcsmddD+CqouTw6pgY7ZJD1Aj1kZejWd1m8YTIo1OYfR2xjbMkN2HbOPQj8zfGXhmGzPpu2V6TuGIppMXWXZjYJ0Jj7iU+pFK2Y+FlPtzJfXOuUOlujlVetg4qnD0eZcPdDCCvgnwACltNBO3hRDkwAAAABJRU5ErkJggg=="
+                            alt=""></span><span id="qqLogin"><img
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAA1CAMAAADWOFNCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo4ZTMxNTgzZS1hZGU3LThkNDEtYmExOC05YTgzMzc3NGFlZmIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjZCNzg3RDNDMDY0MTFFN0I2MDg4NTk4ODg4MzczQjYiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjZCNzg3RDJDMDY0MTFFN0I2MDg4NTk4ODg4MzczQjYiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6YjhlOWY0YjUtZWNiZS0xMTQxLTk1ZmQtNTg0YWQyYzY5MDI2IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6NzczNjY2YjMtMDU2ZC0xMWU3LWI1MzEtZWU3ZDQxMDVlMzRhIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+ctoJwwAAAgFQTFRFiL/5hb36+fz/isD5i8D49/r9/f7/osv2qND78Pb89Pn+hr75/v//h775ttT2v9n2z+L4kML3hr35lMP3hr763Or6utb38fb9mcX3nMj3+Pv+wNr3wdr37vT8l8T31ub59/v/j8L34u36m8b3xuD8jMH5sdX7qs73r9T7rdP76vT+z+X9x934psz3wN38pcv2kcT69fn9kcL30+f9r9H27PX+rdD2+Pv/8/f99vr/+/3+6PD79vn95/L+wt784e36udb2yN73/P3/4e/+qc33v9r3+/3//v7/+fv+yd/46fP+jcH41eb53+79oMr2xd/87/X81Oj94u/+kMP6qs33l8X4jsH3s9P35u/7/P3+s9P2pMv2t9X22ev9yuP8jMH4zuX9msb3l8X34/D+lsT38Pf+lcP38vj+2un5rNL77PP80eT5i8D53Oz9m8f39/r++vz+t9j7u9f33er62Of5sNL27/b+vtz8ocr2q8/3xdz4xt34msj6q9L7icD5j8H3nMn67vb+y+P8sdL3stb7stX76/P8qM338ff+v938jsL52Or93u39jsH40OP41+f5vNv8rc/2lMX6o8v2zOH46vL7wd382uv92+z9vtj25PH+psz23uv6tdT2ncr6nMr6zeH4mcb34O79uNj71OX4m8n6yuL85e/7////hb35////Fl2QNwAAAKt0Uk5T//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8Atyo9bAAAAnJJREFUeNqU1vVD20AUB/BrmtTo2q6l3uIbY8CGu+vc3d3dnflg7u56l79yKVC493Jpwve35N6n11zkHlH1aQn4toZkxsiG3QP+cJugguAT7uQeBmKvXuYwUf8e2Jg+I6lEDuUeYAZZ2us1UlfszDgn3giVUs1yxh4QqPQBZpaITrXPZuZp8EK1qphZyRegOgqYtSQ55V1oETHb2Wl1VTf6p2yNR2peUn9vFhoors2qqIxRJc1mdB4aOp9VlzHaS7mshGPB7gnVHkToEQVBszknVDlCFRDRPgLHSzLKnY9UK1L0Fxxfl1GDCLkwosthAVE0FUNqh05JaPm/qySKF3C7TtEaWPFCJU8RyivSq4uwpE4lPtPLorQIrWILcSJ1W6D6jsGaMAkh9V6gGlHNYrITnvgrQNRxGBb5CbzHb6kwElQ98DqvUYOcBmXbCLiDj43ULfDrEfKEP6SGcfFlKbLemlrAl70mn6BqNlBlfFk3iQC165twokY6ly9TSCF/OMbYfIFirnf8FlCgEiUP3oua/dgMVaBHY6P2fq1A564PIXUBf90KNdULX5TVnmE8WetdUCK3aeok2LVuClfwJV+yZfwbBd6wtZ5spef41MJ8nMP/m/S4ioKn5WFX/0FJkjq7tMqvz+t/dvZXglVnTZPf3h42g9xIT6pFdTNQ/qk95Zl19GPz9K7ns4rkI9xe6XBa3PR+g31ZKbWkqlAPUBu3MFOVrt84Zbo3k6OC3sb7IT8nCm0S91Gf9xmb4J2EUc/mSMkGKF6Sqz9MJAWdkc0ZNutFhw81AWgr9bvNO9hM7gfOlF+KxeKvGgbPdYgK/gswAIjCvo+B/c6rAAAAAElFTkSuQmCC"
+                            alt=""></span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+
+<div class="acc-error" id="error-tips" style="display: none; margin-left: -130px;"><span>对不起，账号或密码错误</span></div>
+<script th:src="@{/static/js/jquery-1.8.3.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/index.js}"></script>
+<script type="text/javascript" th:src="@{/static/layui/layui.js}"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form;
+        form.render();
+    });
+
+
+    /*倒计时显示提示内容*/
+    function tishi(content) {
+        if ($('#error-tips').css('display') === 'none') {
+            var num = 3;
+            var s = setInterval(function () {
+                $("#error-tips").css("display", "block");
+                $("#error-tips span").html(content);
+                num--;
+                if (num <= 0) {
+                    $("#error-tips").css("display", "none");
+                    clearInterval(s);
+                }
+            }, 1000);
+        }
+    }
+
+    /*账号密码不能为空验证*/
+    //登录密码验证
+    function pwdCheck() {
+        var userPwd = $("#userPwd").val().trim();
+        if (userPwd == '') {
+            tishi("密码不能为空")
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    //登录密码验证
+    function phoneCheck() {
+        var userPwd = $("#userPhone").val().trim();
+        if (userPwd == '') {
+            tishi("账号不能为空")
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    // 验证手机号和邮箱是否正确
+    // 登录手机号邮箱验证
+    function checkPhoneRegister() {
+        var phone = $("#userPhone").val().trim();
+        var checkPhone = true;
+        $.ajax({
+            url: '/user/phoneIsRegYesOrNo',
+            dataType: 'json',
+            type: 'post',
+            async: false,
+            data: {
+                userPhone: phone
+            }, success: function (data) {
+                if (data.msg != "ok") {
+                    tishi("该手机号还未注册或已被禁用！");
+                    checkPhone = false;
+                }
+            }
+        });
+        return checkPhone;
+    }
+
+
+    /*用户登录*/
+    function userLogin(gphone, password) {
+        var flag = true;
+        if (checkPhoneRegister()) {
+            $.ajax({
+                url: '/user/phoneLoginDes',
+                type: 'post',
+                async: false,
+                dataType: 'json',
+                data: {
+                    gphone: gphone,
+                    password: password
+                }, success: function (data) {
+                    if (data.msg == "ok") {
+                        window.parent.getSession();
+                        window.parent.yincang();
+                    } else {
+                        tishi('对不起，账号或者密码错误');
+                        flag = false
+                    }
+                }
+            })
+        }
+        return flag;
+    }
+
+    /*讲师登录*/
+    function teacherLogin(gphone, password) {
+        var flag = true;
+        $.ajax({
+            url: '/teacherPhoneLoginDes',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+                gphone: gphone,
+                password: password,
+            }, success: function (data) {
+                if ((data.msg) == "该用户不是讲师用户！") {
+                    tishi("该用户不是讲师用户！请确认手机号/邮箱/密码是否正确");
+                    flag = false;
+                } else {
+                    window.parent.getTeacherSession();
+                    window.parent.yincang();
+                }
+            }
+        })
+        return flag;
+    }
+
+
+    /*讲师登录*/
+    function adminLogin(gphone, password) {
+        var flag = true;
+        $.ajax({
+            url: '/teacherPhoneLoginDes',
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+                gphone: gphone,
+                password: password,
+            }, success: function (data) {
+                if ((data.msg) == "该用户不是讲师用户！") {
+                    tishi("该用户不是讲师用户！请确认手机号/邮箱/密码是否正确");
+                    flag = false;
+                } else {
+                    window.parent.getTeacherSession();
+                    window.parent.yincang();
+                }
+            }
+        })
+        return flag;
+    }
+
+
+    // 登录按钮
+    $("#but").click(function () {
+        var a = $("input[name='c1']:checked").val();
+        var phoned = $("#userPhone").val();
+        var pwdd = $("#userPwd").val();
+        var phoneIsNull = phoneCheck();
+        var pwdIsNull = pwdCheck();
+        if(phoneIsNull && pwdIsNull){
+            if (a == "用户登录") {
+                userLogin(phoned,pwdd);
+            } else if (a == "讲师登录") {
+                teacherLogin(phoned,pwdd);
+            }else if(a == "管理员登录"){
+                adminLogin(phoned,pwdd);
+            }
+        }
+
+    });
+
+
+</script>
+</body>
+</html>
