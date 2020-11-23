@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.mapper.RoomrecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.hotel.entity.Roomrecord">
+        <id column="record_id" property="recordId"/>
+        <result column="record_start" property="recordStart"/>
+        <result column="record_end" property="recordEnd"/>
+        <result column="record_day" property="recordDay"/>
+        <result column="record_state" property="recordState"/>
+        <result column="record_money" property="recordMoney"/>
+        <collection property="user" column="uid" javaType="com.example.hotel.entity.User">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+            <result column="uphone" property="uphone"/>
+            <result column="uidcard" property="uidcard"/>
+            <result column="uaddress" property="uaddress"/>
+        </collection>
+        <collection property="room" column="rid" javaType="com.example.hotel.entity.Room">
+            <id column="rid" property="rid"/>
+            <result column="rserial" property="rserial"/>
+            <result column="rpic" property="rpic"/>
+            <result column="rprice" property="rprice"/>
+            <result column="rcontent" property="rcontent"/>
+            <result column="rstatus" property="rstatus"/>
+            <result column="rtype" property="rtype"/>
+        </collection>
+    </resultMap>
+
+<!--正在入住-->
+    <select id="selectAllRoomRecordCheckIn" parameterType="map" resultMap="BaseResultMap">
+        select u.*,r.*,rr.* from user u,room r,roomrecord rr
+         where  rr.uid=u.uid and rr.rid=r.rid
+         and r.rserial like concat('%',#{rserial},'%')
+         and u.uname like concat('%',#{uname},'%')
+         and record_state="1"
+        order by r.rid
+    </select>
+    <!--正在入住数量-->
+    <select id="selectAllRoomRecordCountCheckIn" parameterType="map" resultType="int">
+        select count(0) from user u,room r,roomrecord rr
+         where  rr.uid=u.uid and rr.rid=r.rid
+         and r.rserial like concat('%',#{rserial},'%')
+         and u.uname like concat('%',#{uname},'%')
+         and record_state="1"
+        order by r.rid
+    </select>
+
+
+
+    <!--已退房-->
+    <select id="selectAllRoomRecordCheckOut" parameterType="map" resultMap="BaseResultMap">
+        select u.*,r.*,rr.* from user u,room r,roomrecord rr where  rr.uid=u.uid and rr.rid=r.rid and r.rserial like concat('%',#{rserial},'%') and record_state="0"
+
+            <if test="recordStart !=''">
+                and rr.record_start &gt;=#{recordStart}
+            </if>
+            <if test="recordEnd !=''">
+                and rr.record_start &lt;=#{recordEnd}
+            </if>
+
+        order by r.rid
+    </select>
+    <!--已退房数量-->
+    <select id="selectAllRoomRecordCountCheckOut" parameterType="map" resultType="int">
+        select count(0) from user u,room r,roomrecord rr where  rr.uid=u.uid and rr.rid=r.rid and r.rserial like concat('%',#{rserial},'%') and record_state="0"
+
+            <if test="recordStart !=''">
+                and rr.record_start &gt;=#{recordStart}
+            </if>
+            <if test="recordEnd !=''">
+                and rr.record_start &lt;=#{recordEnd}
+            </if>
+        order by r.rid
+    </select>
+
+
+
+
+
+<!--    根据rid删除订单表中的数据-->
+    <delete id="delAllRoomRecordByRid" parameterType="room">
+        delete from roomrecord where rid=#{rid}
+    </delete>
+
+
+<!--    根据id查所有-->
+    <select id="selectAllRoomRecordById" parameterType="roomrecord" resultMap="BaseResultMap">
+        select * from roomrecord where record_id=#{recordId}
+    </select>
+
+    <!--    用户住宿的时候向roomrecord表中添加数据-->
+    <insert id="insertRoomRecordRidAndUid" parameterType="roomrecord">
+        insert into roomrecord(rid,uid,record_start) values (#{room.rid},#{user.uid},now())
+    </insert>
+    <!--    用户住宿的时候修改roomrecord表中的状态-->
+    <update id="updateRecordState" parameterType="roomrecord">
+        update roomrecord set record_state="1" where record_id=#{recordId}
+    </update>
+
+<!--    在退房的时候首先来修改roomrecord表中的数据，然后再去修改room表中的房间状态-->
+    <update id="updateChenkOutTuiRecordEndAndStateAndMoney" parameterType="roomrecord">
+        update roomrecord set record_end=now(),record_state="0",record_money=#{recordMoney} where record_id=#{recordId}
+    </update>
+
+<!--    查询所有，用在主页的总金额-->
+    <select id="selectRoomRecordMoney" resultType="java.lang.Double">
+        select sum(record_money) from roomrecord
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.mapper.ReserveMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.hotel.entity.Reserve">
+        <id column="reserveId" property="reserveId" />
+        <result column="reserveBeginTime" property="reserveBeginTime" />
+        <result column="reserveEndTime" property="reserveEndTime" />
+        <collection property="user" column="uid" javaType="com.example.hotel.entity.User">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+            <result column="uphone" property="uphone"/>
+            <result column="uidcard" property="uidcard"/>
+            <result column="uaddress" property="uaddress"/>
+        </collection>
+        <collection property="room" column="rid" javaType="com.example.hotel.entity.Room">
+            <id column="rid" property="rid"/>
+            <result column="rserial" property="rserial"/>
+            <result column="rpic" property="rpic"/>
+            <result column="rprice" property="rprice"/>
+            <result column="rcontent" property="rcontent"/>
+            <result column="rstatus" property="rstatus"/>
+            <result column="rtype" property="rtype"/>
+        </collection>
+    </resultMap>
+
+<!--添加预定-->
+    <insert id="insertReserveYuDing" parameterType="reserve">
+        insert into reserve (reserveBeginTime,reserveEndTime,uid,rid) values (#{reserveBeginTime},#{reserveEndTime},#{user.uid},#{room.rid})
+    </insert>
+
+<!--    查询所有的预定-->
+    <select id="selectAllReserveYuDing" resultMap="BaseResultMap">
+        select * from reserve
+    </select>
+
+    <!--    根据ID查所有-->
+    <select id="selectReserveYuDingById" parameterType="int" resultMap="BaseResultMap">
+        select * from reserve where reserveId=#{reserveId}
+    </select>
+</mapper>

@@ -1,0 +1,174 @@
+<!--顾客入住-->
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui/css/H-ui.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui.admin/css/H-ui.admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/Hui-iconfont/1.0.8/iconfont.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui.admin/skin/default/skin.css}" id="skin"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/h-ui.admin/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/laypage/1.2/skin/laypage.css}">
+    <script type="text/javascript" th:src="@{/static/lib/layer/2.4/layer.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/My97DatePicker/4.8/WdatePicker.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script>
+    <script type="text/javascript" th:src="@{/static/lib/laypage/1.2/laypage.js}" src="/static/lib/laypage/1.2/laypage.js"></script>
+
+    <link rel="stylesheet" th:href="@{/static/css/bootstrap.min.css}" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/static/js/laypage/skin/laypage.css}" href="/static/js/laypage/skin/laypage.css">
+    <link rel="stylesheet" th:href="@{/static/layui-v2.5.5/layui/css/modules/laydate/default/laydate.css}" href="/static/layui-v2.5.5/layui/css/modules/laydate/default/laydate.css">
+
+    <script th:src="@{/static/js/vue/vue.min.js}" src="/static/js/vue/vue.min.js"></script>
+    <script th:src="@{/static/js/jquery/jquery.min.js}" src="/static/js/jquery/jquery.min.js"></script>
+    <script th:src="@{/static/js/laypage/laypage.js}" src="/static/js/laypage/laypage.js" charset="utf-8"></script>
+    <script th:src="@{/static/js/layer/layer.js}" src="/static/js/layer/layer.js" charset="utf-8"> </script>
+    <!--    <script src="../layui/lay/modules/laydate.js"></script>-->
+    <script th:src="@{/static/layui-v2.5.5/layui/lay/modules/laydate.js}"src="/static/layui-v2.5.5/layui/lay/modules/laydate.js"></script>
+    <script th:src="@{/static/js/jquery-1.8.3.js}" src="/static/js/jquery-1.8.3.js"></script>
+
+    <title>用户管理</title>
+</head>
+<style>
+    #riqi {
+        display: none;
+    }
+</style>
+<body  th:fragment="member-list">
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 顾客入住 <span
+        class="c-gray en">&gt;</span> 顾客入住 <a class="btn btn-success radius r"
+                                              style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <form class="form-inline bg-danger" role="form">
+        <div class="text-c">
+            <select name="xiala" id="xiala" onchange="queryByState(this.options[this.options.selectedIndex].value)">
+                <option value="">请选择</option>
+                <option value="" >查看所有</option>
+                <option value="标间" >标间</option>
+                <option value="大床间" >大床间</option>
+                <option value="双人间" >双人间</option>
+                <option value="三人间" >三人间</option>
+                <option value="豪华套间" >豪华套间</option>
+                <option value="总统套间" >总统套间</option>
+            </select><input type="text" class="input-text" style="width:250px" placeholder="输入房间号" id="rserial">
+            <button type="button" class="btn btn-success radius" id="searchRserial"><i class="Hui-iconfont">&#xe665;</i> 搜</button>
+        </div>
+    </form>
+
+
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <span class="1">共有数据：<strong id="shuju"></strong><span id="tiao"></span> 条</span> </div>
+    <div class="mt-20" id="app">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+
+            <tr>
+                <th scope="col" colspan="7">员工管理</th>
+            </tr>
+            <tr class="text-c">
+                <th width="50" th:text="房间号"></th>
+                <th width="70" th:text="房间类型"></th>
+                <th width="75" th:text="房间价格"></th>
+                <th width="60" th:text="房间状态"></th>
+                <th width="80" th:text="操作"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c" v-for="(item,index) in result">
+                <td>{{item.rserial}}</td>
+                <td>{{item.rtype}}</td>
+                <td>{{item.rprice}}</td>
+                <td>{{item.rstatus}}</td>
+                <td class="f-14 td-manage">
+                    <a style="text-decoration:none" class="ml-5" @click="client_add(item.rid)" href="javascript:;" title="点击给客人入住"><i class="Hui-iconfont">&#xe604;</i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table><br/>
+        <div id="pagenav" class="text-c"></div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            result:[]
+        }
+    });
+
+
+    $("#searchRserial").click(function () {
+        getRoomAllClientCheckInPageList();
+    });
+
+
+    function queryByState() {
+        getRoomAllClientCheckInPageList();
+    }
+
+    /**
+     * 2019-12-15 12:01
+     * 遍历出房间
+     */
+    var getRoomAllClientCheckInPageList = function (curr) {
+        $.ajax({
+            type:'POST',
+            dataType:'JSON',
+            url:'/room/roomType',
+            data:{
+                pageNum:curr||1,
+                pageSize:5,
+                rserial:$("#rserial").val(),
+                rtype:$("#xiala option:checked").val()
+            },
+            success:function (data) {
+                app.result = data.page;
+                $("#tiao").html(data.page.total);
+                laypage({
+                    cont: 'pagenav',
+                    skin: '#008B8B',
+                    pages: data.totalPage,
+                    first: "首页",
+                    last: "尾页",
+                    curr: curr || 1,
+                    jump: function (obj, first) {
+                        if (!first) {
+                            getRoomAllClientCheckInPageList(obj.curr);
+                        }
+                    }
+                });
+            }
+        });
+    }
+    getRoomAllClientCheckInPageList();
+
+
+
+    /**
+     * 顾客入住
+     * @param id
+     */
+    function client_add(rid) {
+        layer.open({
+            type: 2,
+            title: '顾客入住',
+            fix: false,
+            maxmin: true,
+            shadeClose: true,
+            area: ['1000px', '600px'],
+            content: '/user/occupancy_index/'+rid,
+            end: function () {
+                getRoomAllPageList();
+            }
+        });
+    }
+</script>
+</body>
+</html>

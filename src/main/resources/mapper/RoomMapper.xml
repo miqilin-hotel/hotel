@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hotel.mapper.RoomMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.hotel.entity.Room">
+        <id column="rid" property="rid"/>
+        <result column="rserial" property="rserial"/>
+        <result column="rpic" property="rpic"/>
+        <result column="rprice" property="rprice"/>
+        <result column="rcontent" property="rcontent"/>
+        <result column="rstatus" property="rstatus"/>
+        <result column="rtype" property="rtype"/>
+        <collection property="user" column="uid" javaType="com.example.hotel.entity.User">
+            <id column="uid" property="uid"/>
+            <result column="uname" property="uname"/>
+            <result column="uphone" property="uphone"/>
+            <result column="uidcard" property="uidcard"/>
+            <result column="uaddress" property="uaddress"/>
+        </collection>
+    </resultMap>
+
+    <!--&lt;!&ndash;    全部房间&ndash;&gt;-->
+    <!--    <select id="selectAllUserAndRoom" parameterType="map" resultMap="BaseResultMap">-->
+    <!--        SELECT u.* , r.* from user u right join room r on r.uid=u.uid-->
+    <!--        order by r.rid-->
+    <!--    </select>-->
+
+    <!--&lt;!&ndash;    全部房间数量&ndash;&gt;-->
+    <!--    <select id="selectAllUserAndRoomCount" parameterType="map" resultType="int">-->
+    <!--        SELECT count(1) from user u right join room r on r.uid=u.uid-->
+    <!--        order by r.rid-->
+    <!--    </select>-->
+
+    <!--    全部房间-->
+    <select id="selectAllUserAndRoom" parameterType="map" resultMap="BaseResultMap">
+        select * from room where rserial like concat('%',#{rserial},'%') order by rid
+    </select>
+
+    <!--    全部房间数量-->
+    <select id="selectAllUserAndRoomCount" parameterType="map" resultType="int">
+       select count(1) from room where rserial like concat('%',#{rserial},'%') order by rid
+    </select>
+
+    <!--        未入住房间-->
+    <select id="selectAllUserAndRoomByWeiRuZhu" parameterType="map" resultMap="BaseResultMap">
+        select * from room where rserial like concat('%',#{rserial},'%') and  rstatus="0" order by rid
+    </select>
+
+    <!--    未入住房间数量-->
+    <select id="selectAllUserAndRoomCountByWeiRuZhu" parameterType="map" resultType="int">
+       select count(1) from room where rserial like concat('%',#{rserial},'%') and  rstatus="0" order by rid
+    </select>
+
+    <!--    已入住房间-->
+    <select id="selectAllUserAndRoomByYiRuZhu" parameterType="map" resultMap="BaseResultMap">
+        select * from room where rserial like concat('%',#{rserial},'%') and  rstatus="1" order by rid
+    </select>
+
+    <!--    已入住房间数量-->
+    <select id="selectAllUserAndRoomCountByYiRuZhu" parameterType="map" resultType="int">
+       select count(1) from room where rserial like concat('%',#{rserial},'%')  and  rstatus="1" order by rid
+    </select>
+
+
+    <!--    根据id查room所有-->
+    <select id="selectAllRoomById" parameterType="int" resultMap="BaseResultMap">
+        select * from room where rid=#{rid}
+    </select>
+
+<!--遍历出房间类型去让客人入住-->
+    <select id="getAllByType" parameterType="map" resultMap="BaseResultMap">
+        select * from room where rstatus="0" and rserial like concat('%',#{rserial},'%')
+        <if test="rtype!=''">
+            and rtype=#{rtype}
+        </if>
+        order by rid
+    </select>
+
+
+    <!--遍历出房间类型去让客人预定-->
+    <select id="getAllByTypeYuDing" parameterType="room" resultMap="BaseResultMap">
+        select * from room where rstatus="0"
+        <if test="rtype!=''">
+            and rtype=#{rtype}
+        </if>
+        order by rid
+    </select>
+
+<!--    遍历出每个房间类型的总量-->
+    <select id="getAllByTypeCount" parameterType="map" resultType="int">
+        select count(1) from room where rstatus="0" and rserial like concat('%',#{rserial},'%')
+        <if test="rtype!=''">
+            and rtype=#{rtype}
+        </if>
+        order by rid
+    </select>
+
+
+    <!--    用户住宿的时候修改room表中数据-->
+    <update id="updateRoomRstatusAndUid" parameterType="room">
+        update room set uid=#{user.uid},rstatus="1" where rid=#{rid}
+    </update>
+
+    <!--    用户预定的时候修改room表中数据-->
+    <update id="updateRoomRstatusAndUidYuDing" parameterType="room">
+        update room set uid=#{user.uid},rstatus="2" where rserial=#{rserial}
+    </update>
+
+<!--    修改完订单表后再来修改room表中的数据-->
+    <update id="updateRoomUidAndRstateByRid" parameterType="room">
+        update room set uid="0",rstatus="0" where rid=#{rid}
+    </update>
+
+<!--    根据房间号查所有-->
+    <select id="selectAllByRserial" parameterType="room" resultMap="BaseResultMap">
+        select * from room where rserial=#{rserial};
+    </select>
+
+
+
+
+</mapper>
